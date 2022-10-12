@@ -4,11 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.ucsal.grupo_pesquisa.exceptions.NegocioException;
+
 public class GrupoPesquisaBS {
 
-	public GrupoPesquisa persistir(GrupoPesquisa pGrupo) {
+
+	private static GrupoPesquisaBS instancia;
+
+	public void criarGrupo(String pNome, String pLider) throws NegocioException {
+		GrupoPesquisa lGrupo = new GrupoPesquisa(pNome,pLider);
+		GrupoPesquisaBS.getInstancia().persistir(lGrupo);
+	}
+
+
+	public void persistir(GrupoPesquisa pGrupo) throws NegocioException {
+		validar(pGrupo);
 		GrupoPesquisaDAO.grupos.add(pGrupo);
-		return GrupoPesquisaDAO.grupos.get(GrupoPesquisaDAO.grupos.size());
 	}
 
 	public boolean excluir(GrupoPesquisa pGrupo) {
@@ -21,25 +32,25 @@ public class GrupoPesquisaBS {
 	}
 
 	public void alterar(GrupoPesquisa pGrupoAntigo, GrupoPesquisa pGrupoNovo) {
-		for(int i = 0; i <= GrupoPesquisaDAO.grupos.size(); i++) {
+		for(int i = 0; i < GrupoPesquisaDAO.grupos.size(); i++) {
 			if(GrupoPesquisaDAO.grupos.get(i).equals(pGrupoAntigo)) {
 				Collections.replaceAll(GrupoPesquisaDAO.grupos, pGrupoAntigo, pGrupoNovo);
 				break;
 			}
 		}
 	}
-	
-	public List<GrupoPesquisa> ObterPorLider(String pLider) {
-		List<GrupoPesquisa> lRetorno = new ArrayList<GrupoPesquisa>();
-		for (int i = 0; i < GrupoPesquisaDAO.grupos.size(); i++) {
-			if(GrupoPesquisaDAO.grupos.get(i).getLider().equals(pLider)) {
-				lRetorno.add(GrupoPesquisaDAO.grupos.get(i));
-			}
+
+	public void validar(GrupoPesquisa pGrupo) throws NegocioException {
+		if(pGrupo.getLider().isEmpty() || pGrupo.getNome().isEmpty()){
+			throw new NegocioException("Preencha todos os campos");
 		}
-		return lRetorno;
+
+		if(!obterPorNome(pGrupo.getNome()).isEmpty()) {
+			throw new NegocioException("Ja existe um grupo com esse nome.");
+		}
 	}
-	
-	public List<GrupoPesquisa> ObterPorNome(String pNome) {
+
+	public List<GrupoPesquisa> obterPorNome(String pNome) {
 		List<GrupoPesquisa> lRetorno = new ArrayList<GrupoPesquisa>();
 		for (int i = 0; i < GrupoPesquisaDAO.grupos.size(); i++) {
 			if(GrupoPesquisaDAO.grupos.get(i).getNome().equals(pNome)) {
@@ -47,6 +58,13 @@ public class GrupoPesquisaBS {
 			}
 		}
 		return lRetorno;
+	}
+
+	public static GrupoPesquisaBS getInstancia() {
+		if(instancia == null) {
+			instancia = new GrupoPesquisaBS();
+		}
+		return instancia;
 	}
 
 }

@@ -2,12 +2,16 @@ package br.ucsal.grupo_pesquisa;
 
 public class GrupoPesquisa {
 	
-	
 	private String nome;
 	private String lider;
 	private String[] docentes;
 	private String[] dicentes;
 	private String[] tecnicoAdministrativos;
+	
+	public GrupoPesquisa(String pNome, String pLider) {
+		this.nome = pNome;
+		this.lider = pLider;
+	}
 	
 	public String getLider() {
 		return this.lider;

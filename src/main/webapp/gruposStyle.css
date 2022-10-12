@@ -1,0 +1,54 @@
+@charset "ISO-8859-1";
+
+body{
+	margin:0;
+	background-color: black;
+}
+
+.principal{
+	height: auto;
+	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tabela{
+	margin-top: 30px;
+	width: 80%;
+	height: fit-content;
+	margin-bottom: 70px;
+}
+
+tr{
+	background-color: white;
+}
+
+.botao{
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	height: 30px;
+	padding: 5px;
+	background-color: #949494;
+	border: 1px;
+	border-radius: 3px;
+	margin-right: 15px;
+}
+
+a{
+	text-decoration:none;
+	color: white;
+}
+
+ul{
+	position :absolute;
+	top: 90%;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-54.5%);
+}
+
+li{
+	float: left;
+}

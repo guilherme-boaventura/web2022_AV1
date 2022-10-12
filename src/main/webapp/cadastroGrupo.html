@@ -3,11 +3,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro De Grupo</title>
+<link rel="stylesheet" href="cadastroGrupoStyle.css">
 </head>
 <body>
-	<form action="cadastroServlet">
-		<input type="text" placeholder="Insira o nome do grupo"><br>
-		<input type="text" placeholder="Insira o nome do líder">
-	</form>
+	<div class="central">
+		<form method="get" action="cadastroGrupoServlet">
+			<input class="txt-input" type="text" placeholder="Insira o nome do grupo" name="nome"><br>
+			<input class="txt-input" type="text" placeholder="Insira o nome do lider" name="lider"><br>
+			<input id="submit" value="Criar" type="submit">
+		</form>
+	</div>
 </body>
 </html>

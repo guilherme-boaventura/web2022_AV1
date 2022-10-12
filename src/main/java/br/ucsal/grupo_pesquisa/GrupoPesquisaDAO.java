@@ -5,6 +5,6 @@ import java.util.List;
 
 public class GrupoPesquisaDAO {
 
-	static List<GrupoPesquisa> grupos = new ArrayList<GrupoPesquisa>();
+	public static List<GrupoPesquisa> grupos = new ArrayList<GrupoPesquisa>();
 	
 }
