@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import br.ucsal.grupo_pesquisa.GrupoPesquisaBS;
 import br.ucsal.grupo_pesquisa.exceptions.NegocioException;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
