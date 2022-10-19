@@ -72,7 +72,7 @@ public class CadastroUsuarioServlet extends HttpServlet implements Servlet {
 				+ "		</div>\r\n"
 				+ "		<form method=\"get\" action=\"cadastroUsuarioServlet\">\r\n"
 				+ "			<input class=\"txt-input\" type=\"text\" placeholder=\"Insira o nome do usuario\" name=\"login\"><br>\r\n"
-				+ "			<input class=\"txt-input\" type=\"text\" placeholder=\"Insira a senha\" name=\"senha\"><br>\r\n"
+				+ "			<input class=\"txt-input\" type=\"password\" placeholder=\"Insira a senha\" name=\"senha\"><br>\r\n"
 				+ "			<input id=\"submit\" value=\"Cadastrar\" type=\"submit\">\r\n"
 				+ "		</form>\r\n"
 				+ "	</div>\r\n"

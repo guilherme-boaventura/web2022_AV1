@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet implements Servlet {
 				+ "		</div>"
 				+ "			<form method=\"get\" action=\"loginServlet\">\r\n"
 				+ "				<input class=\"txt-input\" type=\"text\" placeholder=\"Insira o nome do usuario\" name=\"login\"><br>\r\n"
-				+ "				<input class=\"txt-input\" type=\"text\" placeholder=\"Insira a senha\" name=\"senha\"><br>\r\n"
+				+ "				<input class=\"txt-input\" type=\"password\" placeholder=\"Insira a senha\" name=\"senha\"><br>\r\n"
 				+ "				<input class=\"entrar\" value=\"Entrar\" type=\"submit\">\r\n"
 				+ "			</form>\r\n"
 				+ "			<form method=\"get\" action=\"cadastroUsuario.html\">\r\n"
