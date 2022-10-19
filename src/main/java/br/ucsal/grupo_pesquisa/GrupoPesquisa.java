@@ -1,12 +1,16 @@
 package br.ucsal.grupo_pesquisa;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GrupoPesquisa {
 	
 	private String nome;
 	private String lider;
-	private String[] docentes;
-	private String[] dicentes;
-	private String[] tecnicoAdministrativos;
+	private List<String> membros = new ArrayList<String>();
+	
+	public GrupoPesquisa() {
+	}
 	
 	public GrupoPesquisa(String pNome, String pLider) {
 		this.nome = pNome;
@@ -21,38 +25,16 @@ public class GrupoPesquisa {
 		this.lider = lider;
 	}
 	
-	public String[] getDocentes() {
-		return this.docentes;
-	}
-	
-	public void setDocentes(String[] docentes) {
-		this.docentes = docentes;
-	}
-	
-	public String[] getDicentes() {
-		return this.dicentes;
-	}
-	
-	public void setDicentes(String[] dicentes) {
-		this.dicentes = dicentes;
-	}
-	
-	public String[] getTecnicoAdministrativos() {
-		return this.tecnicoAdministrativos;
-	}
-	
-	public void setTecnicoAdministrativos(String[] tecnicoAdministrativos) {
-		this.tecnicoAdministrativos = tecnicoAdministrativos;
-	}
-
-	
 	public String getNome() {
 		return this.nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	
+	public List<String> getMembros() {
+		return membros;
+	}
 }

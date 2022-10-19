@@ -12,17 +12,24 @@
 	<div class="principal">
 		<div class="tabela">
 		<table style="width:100%" border="1" align="center">
-			<tr style="background-color: #949494;">
-			<th>Grupo</th><th>Lider</th>
+			<tr style="background-color: #949494; text-align: center;">
+			<th>Grupo</th><th>Lider</th><th>Membros</th>
 		</tr>
 		<%
 		for(GrupoPesquisa lGrupo: GrupoPesquisaDAO.grupos) {
-			out.write("<tr>"
+			out.write("<tr style=\" text-align: center;\">"
 					+ "<td>" + lGrupo.getNome() + "</td>"
 					+ "<td>" + lGrupo.getLider() + "</td>"
+					+ "<td>"
+					+ "<form action=\"membros.jsp\">"
+					+"<input style=\"display:none;\" type=\"text\" name=\"grupo\" value=\""+ lGrupo.getNome() +"\">"
+					+"<input type=\"submit\" value=\"Ver membros\">"
+					+"</form>"
+					+"</td>"
 					+ "</tr>");
 		}
 		%>
+		
 		</table>
 		</div>
 		
@@ -34,12 +41,7 @@
 		</li>
 		<li>
 			<div class="botao">
-				<a href="cadastroGrupo.html">Remover Grupo</a>
-			</div>
-		</li>
-		<li>
-			<div class="botao">
-				<a href="cadastroGrupo.html">Alterar Grupo</a>
+				<a href="adicionarMembro.html">Adicionar Membro</a>
 			</div>
 		</li>
 		</ul>

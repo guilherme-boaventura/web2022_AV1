@@ -5,8 +5,7 @@ body{
 }
 
 .central{
-	display:flex;
-	justify-content:center;
+	display:inline-block;
 	position: absolute;
 	right: 50%;
 	top:45%;
@@ -18,17 +17,21 @@ body{
 	text-align: center;
 }
 
-#submit{
+.entrar{
 	position: absolute;
-	right: 50%;
+	right: 75%;
 	transform: translateX(50%);
 }
 
-.h2{
-	display:flex;
-	text-align: center;
+.cadastrar{
 	position: absolute;
-	top:-170%;
+	right: 30%;
+	transform: translateX(50%);
+}
+
+h2{
+	position: absolute;
+	top:-130%;
 	right: 50%;
 	transform: translateX(50%);
 	color: white;

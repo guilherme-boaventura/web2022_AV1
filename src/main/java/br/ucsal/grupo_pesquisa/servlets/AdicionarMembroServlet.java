@@ -10,33 +10,39 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
+
 /**
- * Servlet implementation class CadastroGrupoServlet
+ * Servlet implementation class AdicionarMembroServlet
  */
-@WebServlet("/cadastroGrupoServlet")
-public class CadastroGrupoServlet extends HttpServlet {
+@WebServlet("/adicionarMembroServlet")
+public class AdicionarMembroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CadastroGrupoServlet() {
+	public AdicionarMembroServlet() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String lNome = request.getParameter("nome");
-		String lLider = request.getParameter("lider");
+		String lGrupo = request.getParameter("grupo");
+		String lMembro = request.getParameter("membro");
+
 		try {
-			GrupoPesquisaBS.getInstancia().criarGrupo(lNome, lLider);
+			GrupoPesquisaBS.getInstancia().adicionarMembro(lGrupo, lMembro);
 			response.sendRedirect("./grupos.jsp");
 		} catch (NegocioException e) {
-			response.getWriter().write(failCadastroHtml(e.getMessage()));
+			response.getWriter().write(failAdicaoHtml(e.getMessage()));
 		}
+
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,14 +52,13 @@ public class CadastroGrupoServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-
-	private String failCadastroHtml(String pMensagem) {
+	private String failAdicaoHtml(String pMensagem) {
 		StringBuffer lRetorno = new StringBuffer("<!DOCTYPE html>");
 
 		lRetorno.append("<html>\r\n"
 				+ "<head>\r\n"
 				+ "<meta charset=\"ISO-8859-1\">\r\n"
-				+ "<title>Cadastro De Grupo</title>\r\n"
+				+ "<title>Adicionar Membro</title>\r\n"
 				+ "<link rel=\"stylesheet\" href=\"cadastroGrupoFailStyle.css\">\r\n"
 				+ "</head>\r\n"
 				+ "<body>\r\n"
@@ -66,19 +71,18 @@ public class CadastroGrupoServlet extends HttpServlet {
 				+ "    transform: translateX(50%);\r\n"
 				+ "    color: white;\r\n"
 				+ "\">\r\n"
-				+ "			<h2>CADASTRO DE GRUPO</h2>\r\n"
+				+ "			<h2>ADICIONAR MEMBRO</h2>\r\n"
 				+ "		</div>"
-				+ "		<form method=\"get\" action=\"cadastroGrupoServlet\">\r\n"
-				+ "			<input class=\"txt-input\" type=\"text\" placeholder=\"Insira o nome do grupo\" name=\"nome\"><br>\r\n"
-				+ "			<input class=\"txt-input\" type=\"text\" placeholder=\"Insira o nome do lider\" name=\"lider\"><br>\r\n"
-				+ "			<input id=\"submit\" value=\"Criar\" type=\"submit\">\r\n"
+				+ "		<form method=\"get\" action=\"adicionarMembroServlet\">\r\n"
+				+ "			<input class=\"txt-input\" type=\"text\" placeholder=\"Insira o nome do grupo\" name=\"grupo\"><br>\r\n"
+				+ "			<input class=\"txt-input\" type=\"text\" placeholder=\"Insira o nome do membro\" name=\"membro\"><br>\r\n"
+				+ "			<input id=\"submit\" value=\"Adicionar\" type=\"submit\">\r\n"
 				+ "		</form>\r\n"
 				+ "	</div>\r\n"
 				+ "	<p>" + pMensagem + "</p>\r\n"
 				+ "</body>\r\n"
 				+ "</html>");
-
+		
 		return lRetorno.toString();
 	}
-
 }

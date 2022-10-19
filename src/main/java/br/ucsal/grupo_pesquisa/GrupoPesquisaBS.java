@@ -1,43 +1,16 @@
 package br.ucsal.grupo_pesquisa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import br.ucsal.grupo_pesquisa.exceptions.NegocioException;
 
 public class GrupoPesquisaBS {
 
-
 	private static GrupoPesquisaBS instancia;
 
 	public void criarGrupo(String pNome, String pLider) throws NegocioException {
 		GrupoPesquisa lGrupo = new GrupoPesquisa(pNome,pLider);
-		GrupoPesquisaBS.getInstancia().persistir(lGrupo);
-	}
-
-
-	public void persistir(GrupoPesquisa pGrupo) throws NegocioException {
-		validar(pGrupo);
-		GrupoPesquisaDAO.grupos.add(pGrupo);
-	}
-
-	public boolean excluir(GrupoPesquisa pGrupo) {
-		if(GrupoPesquisaDAO.grupos.contains(pGrupo)) {
-			GrupoPesquisaDAO.grupos.remove(pGrupo);
-			return true;
-		}else {
-			return false;
-		}
-	}
-
-	public void alterar(GrupoPesquisa pGrupoAntigo, GrupoPesquisa pGrupoNovo) {
-		for(int i = 0; i < GrupoPesquisaDAO.grupos.size(); i++) {
-			if(GrupoPesquisaDAO.grupos.get(i).equals(pGrupoAntigo)) {
-				Collections.replaceAll(GrupoPesquisaDAO.grupos, pGrupoAntigo, pGrupoNovo);
-				break;
-			}
-		}
+		persistir(lGrupo);
+		adicionarMembro(lGrupo.getNome(), lGrupo.getLider());
 	}
 
 	public void validar(GrupoPesquisa pGrupo) throws NegocioException {
@@ -45,26 +18,40 @@ public class GrupoPesquisaBS {
 			throw new NegocioException("Preencha todos os campos");
 		}
 
-		if(!obterPorNome(pGrupo.getNome()).isEmpty()) {
+		if(obterPorNome(pGrupo.getNome()) != null) {
 			throw new NegocioException("Ja existe um grupo com esse nome.");
 		}
 	}
 
-	public List<GrupoPesquisa> obterPorNome(String pNome) {
-		List<GrupoPesquisa> lRetorno = new ArrayList<GrupoPesquisa>();
+	public GrupoPesquisa obterPorNome(String pNome) {
 		for (int i = 0; i < GrupoPesquisaDAO.grupos.size(); i++) {
 			if(GrupoPesquisaDAO.grupos.get(i).getNome().equals(pNome)) {
-				lRetorno.add(GrupoPesquisaDAO.grupos.get(i));
+				return GrupoPesquisaDAO.grupos.get(i);
 			}
 		}
-		return lRetorno;
+		return null;
 	}
 
+	public void adicionarMembro(String pGrupo, String lMembro) throws NegocioException {
+		GrupoPesquisa lGp = obterPorNome(pGrupo);
+		
+		if(lGp==null) {
+			throw new NegocioException("Grupo nao encontrado");
+		}else {
+			lGp.getMembros().add(lMembro);
+		}
+	}
+	
 	public static GrupoPesquisaBS getInstancia() {
 		if(instancia == null) {
 			instancia = new GrupoPesquisaBS();
 		}
 		return instancia;
+	}
+
+	private void persistir(GrupoPesquisa pGrupo) throws NegocioException {
+		validar(pGrupo);
+		GrupoPesquisaDAO.grupos.add(pGrupo);
 	}
 
 }
